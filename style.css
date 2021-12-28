@@ -21,3 +21,12 @@ body {
   font-size: 20px;
   margin-top: 10px;
 }
+
+#success_message {
+  font-size: 12px;
+  background-color: #d5ffd5;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid green;
+  display: none;
+}
