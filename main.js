@@ -9,12 +9,33 @@ async function login() {
   if (!user) {
    try {
       user = await Moralis.authenticate({ signingMessage: "Hello World!" })
-      console.log(user)
-      console.log(user.get('ethAddress'))
+      initApp()
    } catch(error) {
      console.log(error)
    }
   }
+  else {
+     initApp() 
+  }
+}
+
+function initApp() {
+    document.querySelector("#app").style.display = "block";
+    document.querySelector("#submit_button").onclick = submit;
+}
+
+async function submit() {
+    // Get image data
+    const input = document.querySelector("#input_image");
+    let data = input.files[0];
+    const imageFile = new Moralis.File(data.name, data);
+    await imageFile.saveIPFS();
+    let imageHash = imageFile.hash();
+    console.log(imageHash);
+    console.log(imageFile.ipfs());
+    // Upload image to IPFS
+    // Create metadata with image hash and data from
+    // Upload to Rarible (plugin)
 }
 
 login();
